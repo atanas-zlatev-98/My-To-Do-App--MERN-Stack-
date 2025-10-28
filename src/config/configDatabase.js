@@ -1,5 +1,5 @@
 const mongoose =require('mongoose');
-require('../models/TaskController.js');
+require('../models/TaskModel.js');
 
 async function configDatabase(){
     const connect = await mongoose.connect(process.env.MONGODB_URL);
