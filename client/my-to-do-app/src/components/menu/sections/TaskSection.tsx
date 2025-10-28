@@ -11,12 +11,12 @@ const TaskSection = () => {
   }
 
   return (
-    <>
+    <div>
      <p className="font-bold">TASKS</p>
         <ul className="flex flex-col gap-2">
 
             <li className={`text-md nav-links-menu ${activePage === 'upcoming' ? 'active-page': ''}`} onClick={()=>handleActivePage('upcoming')}>
-              <NavLink className='flex flex-row items-center p-2' to={'/upcoming'}>
+              <NavLink className='flex flex-row items-center p-2' to={'/tasks/upcoming'}>
                 <ChevronsRight className="h-5 w-5"/>
                 <span className='ps-1 pt-0.5 text-md'>Upcoming</span>
               </NavLink>
@@ -30,14 +30,14 @@ const TaskSection = () => {
             </li>
 
             <li className={`text-md nav-links-menu ${activePage === 'completed' ? 'active-page': ''}`} onClick={()=>handleActivePage('completed')}>
-              <NavLink className='flex flex-row items-center p-2' to={'/completed'}>
+              <NavLink className='flex flex-row items-center p-2' to={'/tasks/completed'}>
                 <CheckCheck className="h-5 w-5"/>
                 <span className='ps-1 pt-0.5 text-md'>Completed</span>
               </NavLink>
             </li>
 
         </ul>
-    </>
+        </div>
   )
 }
 

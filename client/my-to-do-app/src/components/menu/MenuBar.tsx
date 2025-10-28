@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
+
 import { Menu } from "lucide-react";
 import './MenuBar.style.scss';
 import MenuContent from "./MenuContent";
