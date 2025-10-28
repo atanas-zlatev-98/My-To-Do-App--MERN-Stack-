@@ -12,14 +12,28 @@ const taskSchema = new mongoose.Schema({
     priority:{
         type: String,
         enum: ['Critical','High','Medium','Low'],
-        default: 'Medium'
+        default: 'Medium',
+        required:true,
     },
     isCompleted:{
         type: Boolean,
         default: false,
+        required:true,
     },
-},{
-    timestamps: true
+    taskType:{
+        type:String,
+        enum: ['Personal','Work','Hobby'],
+        required:true,
+    },
+    startData: {
+        type:Date,
+        default:Date.now,
+        required: true
+    },
+    endDate:{
+        type: Date,
+        required:true
+    }
 })
 
 const TasksModel = new mongoose.model('Tasks',taskSchema);
