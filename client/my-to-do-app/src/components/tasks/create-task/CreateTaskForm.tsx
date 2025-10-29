@@ -15,48 +15,44 @@ const CreateTaskForm = () => {
   const [formData, setFormData] = useState(createTaskInitialValues);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
+ 
+  const changeHandler = (input:ReactInputEvent) =>{
 
-  const changeHandler = (e: ReactInputEvent) => {
-    setFormData((oldValues) => ({
-      ...oldValues,
-      [e.target.name]: e.target.value,
-    }));
-  };
+    if('target' in input){
+      
+      const {name,value} = input.target;
 
-  const localDate = (date:Date)=>{
-    const localDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-    return localDate.toISOString().split("T")[0];
+      setFormData((oldValue)=>({
+        ...oldValue,
+        [name]:value
+      }));
+
+    }else {
+      
+      const {name,value} = input;
+      let formattedValue: Date | string;
+
+      if(value instanceof Date){
+
+          const localDate = new Date(Date.UTC(value.getFullYear(), value.getMonth(), value.getDate()));
+          formattedValue = localDate.toISOString().split("T")[0];
+
+      }else {
+          formattedValue = value;
+      }
+
+      setFormData((oldValues)=>({
+        ...oldValues,
+        [name]:formattedValue
+      }))
+
+    }
   }
-
-  const handlePriorityChange = (value: string) => {
-    setFormData((oldValues) => ({
-      ...oldValues,
-      priority: value,
-    }));
-  };
-
-  const handleTaskType = (value: string) => {
-    setFormData((oldValues) => ({
-      ...oldValues,
-      taskType: value,
-    }));
-  };
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("From Submitted", formData);
   };
-
-  const handleDateSelect = (selectedDate: Date) => {
-    setDate(selectedDate);
-    setOpen(false);
-   
-    setFormData((oldValues) => ({
-      ...oldValues,
-      endDate: localDate(selectedDate),
-    }));
-  };
-  
   return (
 
     <form onSubmit={submitHandler} className="m-5 w-100 flex flex-col gap-5">
@@ -75,7 +71,7 @@ const CreateTaskForm = () => {
         <div className="flex flex-row gap-5">
           <div>
             <Label htmlFor="priotity">Priority</Label>
-              <Select onValueChange={handlePriorityChange}>
+              <Select onValueChange={(value)=>changeHandler({name:'priority',value})}>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
@@ -90,7 +86,7 @@ const CreateTaskForm = () => {
 
           <div>
             <Label htmlFor="taskType">Task Type</Label>
-              <Select onValueChange={handleTaskType}>
+              <Select onValueChange={(value)=>changeHandler({name:"taskType",value})}>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
@@ -118,7 +114,10 @@ const CreateTaskForm = () => {
             </PopoverTrigger>
 
             <PopoverContent className="w-auto overflow-hidden p-0" align="start">
-              <Calendar mode="single" selected={date} required={true} captionLayout="dropdown" onSelect={handleDateSelect}/>
+              <Calendar mode="single" selected={date} required={true} captionLayout="dropdown" onSelect={(selectedDate) => {
+                setDate(selectedDate);
+                changeHandler({ name: "endDate", value: selectedDate })
+                setOpen(false)}}/>
             </PopoverContent>
 
           </Popover>
