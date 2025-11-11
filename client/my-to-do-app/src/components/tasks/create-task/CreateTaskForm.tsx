@@ -60,7 +60,7 @@ const CreateTaskForm = () => {
         const task = await createSingleTask(formData);
         console.log(task);
         setFormData(createTaskInitialValues);
-
+        setDate(undefined);
     }catch(err){
      console.log(err);
     }
