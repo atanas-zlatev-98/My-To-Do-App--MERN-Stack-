@@ -1,3 +1,5 @@
+import type { TaskFormData } from "@/types/types";
+
 const date = new Date();
 
 const day = date.getDate();
@@ -6,12 +8,12 @@ const year = date.getFullYear();
 
 const currentDate = `${day}-${month}-${year}`;
 
-export const createTaskInitialValues = {
+export const createTaskInitialValues:TaskFormData = {
     title: "",
     description: "",
-    priority: "",
+    priority: "Low",
     isCompleted: false,
-    taskType: "",
+    taskType: "Work",
     startDate: currentDate,
     endDate: "",
 }

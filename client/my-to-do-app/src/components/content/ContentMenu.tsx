@@ -1,14 +1,15 @@
 import "./ContentMenu.style.scss";
 import { Button } from "../ui/button";
 import type { ReactNode } from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
+import CreateTaskForm from "../tasks/create-task/CreateTaskForm";
 
 const ContentMenu = ({children}:{children:ReactNode}) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const createTask = () =>{
-    navigate('/tasks/create')
-  }
+  // const createTask = () =>{
+  //   navigate('/tasks/create')
+  // }
 
   return (
     <div className="flex w-screen flex-col bg-white">
@@ -17,7 +18,7 @@ const ContentMenu = ({children}:{children:ReactNode}) => {
           Total Tasks
         </h1>
         <Button className="">0</Button>
-        <Button onClick={createTask}>Add Task</Button>
+        <CreateTaskForm/>
       </div>
       <div>
         {children}

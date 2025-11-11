@@ -8,5 +8,11 @@ export type TaskFormData = {
   endDate: string;
 };
 
+export type RequestInit = {
+  method?: string,
+  headers?: Record<string,string>,
+  body?: string
+}
+
 export type ReactInputEvent = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> | { name: string; value: string | Date }
 export type ReactSelectEvent = React.ChangeEvent<HTMLSelectElement>
