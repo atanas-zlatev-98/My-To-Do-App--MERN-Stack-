@@ -4,7 +4,7 @@ import Layout from "./components/layout/Layout";
 import Tasks from "./components/tasks/Tasks";
 import Completed from "./components/tasks/Completed";
 import Upcoming from "./components/tasks/Upcoming";
-import CreateTask from "./components/tasks/create-task/CreateTask";
+// import CreateTask from "./components/tasks/create-task/CreateTask";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
             <Route path="/tasks" element={<Tasks />}></Route>
             <Route path="/tasks/upcoming" element={<Upcoming/>}></Route>
             <Route path="/tasks/completed" element={<Completed/>}></Route>
-            <Route path="/tasks/create" element={<CreateTask/>}></Route>
+            {/* <Route path="/tasks/create" element={<CreateTask/>}></Route> */}
           </Routes>
         </Layout>
       </div>

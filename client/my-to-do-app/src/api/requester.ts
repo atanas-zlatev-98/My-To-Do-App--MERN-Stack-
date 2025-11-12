@@ -32,7 +32,7 @@ export default async function requester(method:string,url:string,data?:TaskFormD
 
 }
 
-export const get = (url:string,data:TaskFormData)=>requester('GET',url,data);
+export const get = (url:string)=>requester('GET',url);
 export const post = (url:string,data:TaskFormData)=>requester('POST',url,data);
 export const del = (url:string) =>requester('DELETE',url);
 export const update = (url:string,data:TaskFormData)=>requester('PUT',url,data);

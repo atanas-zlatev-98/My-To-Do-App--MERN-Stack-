@@ -11,12 +11,15 @@ import type { ReactInputEvent } from "@/types/types";
 import { ChevronDownIcon } from "lucide-react";
 import React, { useState } from "react";
 import {createSingleTask} from "@/api/task-api.ts";
+import { useNavigate } from "react-router";
 
 const CreateTaskForm = () => {
 
   const [formData, setFormData] = useState(createTaskInitialValues);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
+
+  const navigate = useNavigate();
 
   const changeHandler = (input: ReactInputEvent) => {
 
@@ -61,6 +64,8 @@ const CreateTaskForm = () => {
         console.log(task);
         setFormData(createTaskInitialValues);
         setDate(undefined);
+
+       navigate('/tasks', { state: { refresh: Date.now() } });
     }catch(err){
      console.log(err);
     }
@@ -84,18 +89,18 @@ const CreateTaskForm = () => {
           <form onSubmit={submitHandler} className="m-5 w-100 flex flex-col gap-5">
             <div className="space-y-6">
               <div>
-                <Label htmlFor="title">Title</Label>
+                <Label htmlFor="title" className="mb-2">Task Title</Label>
                 <Input id="title" name="title" type="text" value={formData.title} onChange={changeHandler}></Input>
               </div>
 
               <div>
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description" className="mb-2">Description</Label>
                 <Textarea id="description" name="description" value={formData.description} onChange={changeHandler}></Textarea>
               </div>
 
               <div className="flex flex-row gap-5">
                 <div>
-                  <Label htmlFor="priotity">Priority</Label>
+                  <Label htmlFor="priotity" className="mb-2">Priority</Label>
                   <Select onValueChange={(value) => changeHandler({ name: "priority", value })} defaultValue="Low">
                     <SelectTrigger className="w-[190px]">
                       <SelectValue placeholder="Select" />
@@ -110,7 +115,7 @@ const CreateTaskForm = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="taskType">Task Type</Label>
+                  <Label htmlFor="taskType" className="mb-2">Task Type</Label>
                   <Select onValueChange={(value) => changeHandler({ name: "taskType", value })} defaultValue="Work">
                     <SelectTrigger className="w-[190px]">
                       <SelectValue placeholder="Select" />
@@ -124,8 +129,8 @@ const CreateTaskForm = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-3">
-                <Label htmlFor="date" className="px-1">
+              <div>
+                <Label htmlFor="date" className="mb-2">
                   Finish Before
                 </Label>
                 <Popover open={open} onOpenChange={setOpen}>
